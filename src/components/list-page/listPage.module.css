@@ -1,0 +1,45 @@
+.algoContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 125px;
+  }
+  
+  .clickContainer{
+    display: flex;
+    flex-direction: column;
+    min-width: 829px;
+    justify-content: space-between;
+  }
+  .topClickBox{
+    display: flex;
+    gap: 12px;
+  }
+  .bottomClickBox{
+    width: 100%;
+    display: flex;
+    gap: 12px;
+  }
+  .symbolBox{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .indexInputBtn{
+    max-width: 225px;
+  }
+  .indexClickBtn{
+    min-width: 372px;
+  }
+  .indexClickBox{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .stroke{
+    font-size: 30px;
+    font-weight: bold;
+    color: blue;
+  }
+  
+ 

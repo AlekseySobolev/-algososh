@@ -1,0 +1,16 @@
+.dataContainer{
+    gap: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.inputBox{
+    display: flex;
+    min-width: 567px;
+    gap: 12px;
+}
+
+.symbolBox{
+    display: flex;
+    gap: 12px;
+}

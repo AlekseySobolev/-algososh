@@ -11,6 +11,7 @@ export const getRandomArray = (min = 0, max = 100, minLength = 3, maxLength = 17
     const result = new Array(getIntFromInterval(minLength, maxLength)).fill(0);
     return Array.from(new Set(result.map(() => getIntFromInterval(min, max))))
 }
+
 export const getColumnState = (index: number, isLastStep: boolean, currerntStep: Step): ElementStates => {
     if ([currerntStep.aIndex, currerntStep.bIndex].includes(index)) {
         return ElementStates.Changing;
@@ -34,7 +35,7 @@ export const bubbleSort = (arrForSort: number[], sortDirect: Direction): Step[] 
         isSorted = false;
 
         for (let i = 0; i < arrForSort.length - 1 - itrNum; i++) {
-            if (sortDirect === Direction.Descending ? arrForSort[i] > arrForSort[i + 1] : arrForSort[i] < arrForSort[i + 1]) {
+            if (sortDirect === Direction.Descending ? arrForSort[i] < arrForSort[i + 1] : arrForSort[i] > arrForSort[i + 1]) {
                 swap(arrForSort, i, i + 1);
                 isSorted = true;
             }
@@ -65,7 +66,7 @@ export const selectSort = (arrForSort: number[], sortDirect: Direction): Step[] 
             let maxInd = i;
             let j = i + 1;
 
-            if (sortDirect === Direction.Descending ? arrForSort[maxInd] > arrForSort[j] : arrForSort[maxInd] < arrForSort[j]) {
+            if (sortDirect === Direction.Descending ? arrForSort[maxInd] < arrForSort[j] : arrForSort[maxInd] > arrForSort[j]) {
                 maxInd = j;
             }
 

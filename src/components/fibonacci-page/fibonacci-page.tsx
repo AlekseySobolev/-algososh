@@ -9,7 +9,7 @@ import styles from "./fibonacciPage.module.css";
 export const FibonacciPage: React.FC = () => {
 
   const stepsCount = useRef<number>(0);
-  const timer = useRef<any>();
+  const timer = useRef<number>();
   const isLoader = useRef<boolean>(false);
   let qtyFibNumbers: number = 0;
 
@@ -17,43 +17,45 @@ export const FibonacciPage: React.FC = () => {
   const [allFibNumbers, setAllFibNumbers] = useState<number[][]>([]);
   const [isButtonDisable, setIsButtonDisable] = useState(true);
   const [isStrArrVisible, setIsStrArrVisible] = useState(false);
-  
+
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 
     stepsCount.current = 0;
     setCurrentFibNumber([]);
     setIsStrArrVisible(false);
-  
+
     qtyFibNumbers = Number(e.target.value);
 
-    if (qtyFibNumbers >= 1  && qtyFibNumbers <= 19) {
+    if (qtyFibNumbers >= 1 && qtyFibNumbers <= 19) {
       setIsButtonDisable(false);
-      setAllFibNumbers(getFibArr(qtyFibNumbers));
+      setAllFibNumbers(getFibonacciNumbers(qtyFibNumbers));
     }
     else {
       setIsButtonDisable(true);
     }
   }
 
-  const getFibArr = (n: number): number[][] => {
+  const getFibonacciNumbers = (n: number): number[][] => {
 
     const fibArr = [0];
     const arrayOfFibArr: number[][] = [];
-    
+
     arrayOfFibArr.push([...fibArr]);
     fibArr.push(1);
     arrayOfFibArr.push([...fibArr]);
 
-    if(n > 1){
-     for (let i = 2; i < n + 1; i++){
-       fibArr.push(fibArr[i - 2] + fibArr[i -1]);
-       arrayOfFibArr.push([...fibArr]);
-     }
+    if (n > 1) {
+
+      for (let i = 2; i < n + 1; i++) {
+        fibArr.push(fibArr[i - 2] + fibArr[i - 1]);
+        arrayOfFibArr.push([...fibArr]);
+      }
     }
+
     return arrayOfFibArr;
   }
-  
+
   const setNextStep = () => {
     setCurrentFibNumber(allFibNumbers[stepsCount.current]);
     stepsCount.current += 1;
@@ -65,26 +67,25 @@ export const FibonacciPage: React.FC = () => {
     timer.current = window.setInterval(setNextStep, 500);
   }
 
- 
+
   if (stepsCount.current > 0 && stepsCount.current >= allFibNumbers.length - 1) {
     isLoader.current = false;
     window.clearInterval(timer.current);
-}
+  }
 
-  console.log(isStrArrVisible);
   return (
     <SolutionLayout title="Последовательность Фибоначчи">
-     <div className={styles.dataContainer}>
+      <div className={styles.dataContainer}>
         <div className={styles.inputBox}>
-          <Input type="number" max={19} isLimitText={true} onChange={handleChange} />
+          <Input type="number" max={19} isLimitText={true} onChange={handleChange} disabled={isLoader.current}/>
           <Button text="Развернуть" handleClick={handleClick} disabled={isButtonDisable} isLoader={isLoader.current} />
         </div>
         <div className={styles.symbolBox}>
-            {currentFibNumber.length> 0 && isStrArrVisible &&
+          {currentFibNumber.length > 0 && isStrArrVisible &&
             currentFibNumber.map((fibNumber: number, index: number) => {
               return (
                 <React.Fragment key={index}>
-                <Circle index={index}  letter={String(fibNumber)}/>
+                  <Circle index={index} letter={String(fibNumber)} />
                 </React.Fragment>
               )
             })}

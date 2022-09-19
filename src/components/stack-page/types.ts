@@ -1,14 +1,11 @@
 export interface IStack<T> {
     push: (item: T) => void;
     pop: () => void;
-    peak: () => T | null;
-    getSize: () => number;
-    clean: () => void;
-    getContainer: () => T[];
+    clear: () => void;
   }
 
 export enum StackOperation{
     Push = "push",
     Pop = "pop",
-    Clean = "clean"
+    Clear = "clear"
 }

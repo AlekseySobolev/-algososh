@@ -12,31 +12,17 @@ import { QueueOperation } from "./types";
 
 export const QueuePage: React.FC = () => {
 
-  const timer = useRef<number>();
-  const defaultArray = useRef<any[][]>([[""], [""], [""], [""], [""], [""]]);
-  const indexHead = useRef(-1);
-  const indexTail = useRef(-1);
-
   const [isInputEmpty, setIsInputEmpty] = useState(true);
   const [isQueue, setIsQueue] = useState(true);
-  const [isDequeue, setIsdequeue] = useState(false);
-  const [AllSliceOfQueue, setAllSliceOfQueue] = useState<any[]>(defaultArray.current);
+  const [isClear, setIsClear] = useState(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [colorState, setColorState] = useState(ElementStates.Default);
 
-  let queue = useRef<any>(new Queue(6));
-
-  useEffect(
-    () => {
-      setAllSliceOfQueue(defaultArray.current);
-    },
-    []
-  );
+  const timer = useRef<number>();
+  const queue = useRef(new Queue(7));
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if(queue.current.length === 0){
-      queue.current = new Queue(6);
-    }
+   
     if (e.target.value) {
       setInputValue(e.target.value);
       setIsInputEmpty(false);
@@ -44,11 +30,10 @@ export const QueuePage: React.FC = () => {
       setInputValue("");
       setIsInputEmpty(true);
     }
-
   }
 
   const queueClick = () => {
-    makeOperation(QueueOperation.Queue);
+    makeOperation(QueueOperation.Enqueue);
     setIsInputEmpty(true);
     setInputValue("");
   }
@@ -56,58 +41,41 @@ export const QueuePage: React.FC = () => {
   const dequeueClick = () => {
     makeOperation(QueueOperation.Dequeue);
   }
-  const cleanlick = () => {
-    queue.current = [];
-    indexTail.current = -1;
-    indexHead.current = -1;
-    defaultArray.current = [[""], [""], [""], [""], [""], [""]];
-    setAllSliceOfQueue(defaultArray.current);
+  const clearClick = () => {
+    makeOperation(QueueOperation.Clear);
   }
 
   const makeOperation = (typeOfOperation: QueueOperation) => {
+    setIsClear(false);
+    if (typeOfOperation === QueueOperation.Enqueue) {
 
-    if (typeOfOperation === QueueOperation.Queue) {
+      setIsQueue(true);
+      setColorState(ElementStates.Changing);
 
-        setIsQueue(true);
-        setIsdequeue(false);
-
-        setColorState(ElementStates.Changing);
-   
+      timer.current = window.setTimeout(() => {
+        queue.current.enqueue(inputValue);
         timer.current = window.setTimeout(() => {
-  
-          if (indexHead.current === -1){
-            indexHead.current++;
-          }
-    
-          indexTail.current = queue.current.getTail();
-          queue.current.enqueue(inputValue);
-
-          defaultArray.current.splice(indexTail.current, 0, queue.current.last());
-          defaultArray.current.pop();
-
           setColorState(ElementStates.Default);
-          setAllSliceOfQueue(defaultArray.current);
-     
-        }, SHORT_DELAY_IN_MS);
+        }, SHORT_DELAY_IN_MS)
+
+      }, SHORT_DELAY_IN_MS);
 
 
     } else if (typeOfOperation === QueueOperation.Dequeue) {
-    
-        setIsdequeue(true);
-        setIsQueue(false);
-   
-        setColorState(ElementStates.Changing);
-        indexHead.current = queue.current.getHead();
-            
-        timer.current = window.setTimeout(() => {
 
-          defaultArray.current[indexHead.current] = [""];
-          queue.current.dequeue();
-          indexHead.current = queue.current.getHead();
-          setColorState(ElementStates.Default);
-          setAllSliceOfQueue(defaultArray.current);
- 
-        }, SHORT_DELAY_IN_MS);
+      setIsQueue(false);
+      setColorState(ElementStates.Changing);
+
+      timer.current = window.setTimeout(() => {
+
+        queue.current.dequeue("");
+        setColorState(ElementStates.Default);
+
+      }, SHORT_DELAY_IN_MS);
+
+    }else if(typeOfOperation === QueueOperation.Clear){
+      queue.current.clear();
+      setIsClear(true);
     }
   }
 
@@ -126,28 +94,27 @@ export const QueuePage: React.FC = () => {
             <Button
               text="Удалить"
               handleClick={dequeueClick}
-              disabled={queue.current.length === 0}
+              disabled={queue.current.fillLength === 0}
               extraClass={styles.popBtn}
             />
           </div>
           <Button
             text="Очистить"
-            handleClick={cleanlick}
-            disabled={queue.current.length === 0}
+            handleClick={clearClick}
+            disabled={queue.current.fillLength === 0}
             extraClass={styles.cleanBtn}
           />
         </div>
 
         <div className={styles.symbolBox}>
-
-          {AllSliceOfQueue.length > 0 &&
-            AllSliceOfQueue.map((letter: any, index: number) => {
+          {queue.current.size > 0 &&
+            queue.current.elements.map((letter: any, index: number) => {
               return (
                 <React.Fragment key={index}>
-                  <Circle index={index} letter={letter} state={isQueue ? index === indexTail.current + 1 ? colorState : ElementStates.Default : index === indexHead.current ? colorState : ElementStates.Default} head={ index === indexHead.current ? HEAD : null} tailType={"string"} tail={index === indexTail.current ? TAIL : null} />
+                  <Circle index={index} letter={letter} state={isQueue ? (index === queue.current.tail) ? colorState : ElementStates.Default : index === queue.current.head ? colorState : ElementStates.Default} head={(index === queue.current.head) && queue.current.fillLength > 0 ? HEAD : null} tailType={"string"} tail={index === queue.current.tail-1 && queue.current.fillLength > 0 ? TAIL : null} />
                 </React.Fragment>
               )
-            })}         
+            })}
         </div>
       </div>
     </SolutionLayout>

@@ -7,16 +7,17 @@ import { Step, typeOfSort } from "./types";
 import styles from "./sorting.module.css";
 import { Column } from "../ui/column/column";
 import { Direction } from "../../types/direction";
-import { DELAY_IN_MS, SHORT_DELAY_IN_MS } from "../../constants/delays";
+import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 
 export const SortingPage: React.FC = () => {
 
 
   const randomArr = useRef<number[]>(getRandomArray());
   const timer = useRef<number>();
-  const [currentDirection, setDirection] = useState<Direction>(Direction.Ascending);
+  const currentDirection = useRef<Direction>(Direction.Ascending);
   const [currentTypeOfSort, setCurrentTypeOfSort] = useState<typeOfSort>(typeOfSort.Select);
   const [currentSortStep, setCurrentSortStep] = useState(0);
+
   const [allSortSteps, setAllSortSteps] = useState<Step[]>([{
     currentArray: randomArr.current,
     sortedIndexes: []
@@ -71,8 +72,8 @@ export const SortingPage: React.FC = () => {
     }]);
     setCurrentSortStep(0);
 
-    setDirection(Direction.Ascending);
-    makeSort(currentDirection, currentTypeOfSort);
+    currentDirection.current = Direction.Ascending;
+    makeSort(currentDirection.current, currentTypeOfSort);
   }
 
   const descClick = () => {
@@ -83,8 +84,8 @@ export const SortingPage: React.FC = () => {
     }]);
     setCurrentSortStep(0);
 
-    setDirection(Direction.Descending);
-    makeSort(currentDirection, currentTypeOfSort);
+    currentDirection.current = Direction.Descending;
+    makeSort(currentDirection.current, currentTypeOfSort);
   }
 
   return (
@@ -110,16 +111,16 @@ export const SortingPage: React.FC = () => {
             sorting={Direction.Ascending}
             text="По возрастанию"
             handleClick={ascClick}
-            disabled={currentDirection !== Direction.Ascending && isAlgoInProcess}
-            isLoader={currentDirection === Direction.Ascending && isAlgoInProcess}
+            disabled={currentDirection.current !== Direction.Ascending && isAlgoInProcess}
+            isLoader={currentDirection.current === Direction.Ascending && isAlgoInProcess}
             extraClass={styles.btn}
           />
           <Button
             sorting={Direction.Descending}
             text="По убыванию"
             handleClick={descClick}
-            disabled={currentDirection !== Direction.Descending && isAlgoInProcess}
-            isLoader={currentDirection === Direction.Descending && isAlgoInProcess}
+            disabled={currentDirection.current !== Direction.Descending && isAlgoInProcess}
+            isLoader={currentDirection.current === Direction.Descending && isAlgoInProcess}
             extraClass={styles.btn}
           />
           </div>

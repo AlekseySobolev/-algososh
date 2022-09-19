@@ -87,7 +87,7 @@ export class LinkedList<T> implements ILinkedList<T> {
       let prev = null;
       let curr = this.head;
 
-      if (index == 0) {
+      if (index === 0) {
         node.next = this.head;
         this.head = node;
       } else {

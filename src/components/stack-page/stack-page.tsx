@@ -12,17 +12,12 @@ import { StackOperation } from "./types";
 
 export const StackPage: React.FC = () => {
 
-  const arrayOfArray = useRef<any[]>([]);
   const timer = useRef<number>();
-  
+  const stack = useRef(new Stack());
+
   const [colorState, setColorState] = useState(ElementStates.Default);
   const [isInputEmpty, setIsInputEmpty] = useState(true);
-  const [AllSliceOfStack, setAllSliceOfStack] = useState<string[] | number[]>([]);
-
-
-  const stack = new Stack();
   const [inputValue, setInputValue] = useState<string>("");
-
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 
@@ -42,58 +37,41 @@ export const StackPage: React.FC = () => {
     makeOperation(StackOperation.Pop);
   }
   const cleanlick = () => {
-    makeOperation(StackOperation.Clean);
+    makeOperation(StackOperation.Clear);
   }
 
   const makeOperation = (typeOfOperation: StackOperation) => {
 
     if (typeOfOperation === StackOperation.Push) {
 
-      stack.push(inputValue);
-      arrayOfArray.current.push(stack.getContainer());
-
+      stack.current.push(inputValue);
       setColorState(ElementStates.Changing);
-       //setAllSliceOfStack([...stack.getContainer()]); не работает, пришлось использовать допю реф arrayOfArray
-      setAllSliceOfStack(arrayOfArray.current);
-    
-      setInputValue("");
-      setIsInputEmpty(true);
 
       timer.current = window.setTimeout(() => {
 
+        setInputValue("");
+        setIsInputEmpty(true);
         setColorState(ElementStates.Default);
-        setAllSliceOfStack(arrayOfArray.current);
 
       }, SHORT_DELAY_IN_MS);
 
     } else if (typeOfOperation === StackOperation.Pop) {
 
-      setInputValue("");
       setColorState(ElementStates.Changing);
-      setAllSliceOfStack(arrayOfArray.current);
-     
+
       timer.current = window.setTimeout(() => {
 
-        stack.pop();
-         //setAllSliceOfStack([...stack.getContainer()]); не работает, пришлось использовать доп реф arrayOfArray
-        arrayOfArray.current.pop();
-
+        stack.current.pop();
         setColorState(ElementStates.Default);
-        setAllSliceOfStack(arrayOfArray.current);
 
-        if (arrayOfArray.current.length === 0) {
+        if (stack.current.size === 0) {
           setIsInputEmpty(true);
         }
       }, SHORT_DELAY_IN_MS);
 
-
-    }
-
-    else if (typeOfOperation === StackOperation.Clean) {
-      stack.clean();
-      arrayOfArray.current = [];
-      setAllSliceOfStack([])
-      setIsInputEmpty(true);
+    } else if (typeOfOperation === StackOperation.Clear) {
+      stack.current.clear();
+      setColorState(ElementStates.Changing);
     }
   }
 
@@ -102,7 +80,7 @@ export const StackPage: React.FC = () => {
       <div className={styles.algoContainer}>
         <div className={styles.clickContainer}>
           <div className={styles.clickBox}>
-            <Input maxLength={4} isLimitText={true} onChange={handleChange} value={inputValue} extraClass={styles.inputBtn}/>
+            <Input maxLength={4} isLimitText={true} onChange={handleChange} value={inputValue} extraClass={styles.inputBtn} />
             <Button
               text="Добавить"
               handleClick={pushClick}
@@ -112,24 +90,24 @@ export const StackPage: React.FC = () => {
             <Button
               text="Удалить"
               handleClick={popClick}
-              disabled={AllSliceOfStack.length === 0}
+              disabled={stack.current.size === 0}
               extraClass={styles.popBtn}
             />
           </div>
           <Button
             text="Очистить"
             handleClick={cleanlick}
-            disabled={AllSliceOfStack.length === 0}
+            disabled={stack.current.size === 0}
             extraClass={styles.cleanBtn}
           />
         </div>
 
         <div className={styles.symbolBox}>
-          {AllSliceOfStack.length > 0 &&
-            AllSliceOfStack.map((letter: any, index: number) => {
+          {stack.current.size > 0 &&
+            stack.current.elements.map((letter: any, index: number) => {
               return (
                 <React.Fragment key={index}>
-                  <Circle index={index} letter={letter} state={index === AllSliceOfStack.length - 1 ? colorState : ElementStates.Default} head={index === AllSliceOfStack.length - 1 ? TOP : ""} />
+                  <Circle index={index} letter={letter} state={index === stack.current.size - 1 ? colorState : ElementStates.Default} head={index === stack.current.size - 1 ? TOP : ""} />
                 </React.Fragment>
               )
             })}

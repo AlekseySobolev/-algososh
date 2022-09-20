@@ -4,13 +4,12 @@ import { RadioInput } from "../ui/radio-input/radio-input";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { bubbleSort, getColumnState, getRandomArray, selectSort } from "./functions";
 import { Step, typeOfSort } from "./types";
-import styles from "./sorting.module.css";
+import styles from "./sorting-page.module.css";
 import { Column } from "../ui/column/column";
 import { Direction } from "../../types/direction";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 
 export const SortingPage: React.FC = () => {
-
 
   const randomArr = useRef<number[]>(getRandomArray());
   const timer = useRef<number>();

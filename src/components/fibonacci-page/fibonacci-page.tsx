@@ -1,10 +1,9 @@
 import React, { ChangeEvent, useRef, useState } from "react";
-import { ElementStates } from "../../types/element-states";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import { Input } from "../ui/input/input";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
-import styles from "./fibonacciPage.module.css";
+import styles from "./fibonacci-page.module.css";
 
 export const FibonacciPage: React.FC = () => {
 
@@ -77,7 +76,7 @@ export const FibonacciPage: React.FC = () => {
     <SolutionLayout title="Последовательность Фибоначчи">
       <div className={styles.dataContainer}>
         <div className={styles.inputBox}>
-          <Input type="number" max={19} isLimitText={true} onChange={handleChange} disabled={isLoader.current}/>
+          <Input placeholder="Введите число" type="number" max={19} isLimitText={true} onChange={handleChange} disabled={isLoader.current}/>
           <Button text="Развернуть" handleClick={handleClick} disabled={isButtonDisable} isLoader={isLoader.current} />
         </div>
         <div className={styles.symbolBox}>

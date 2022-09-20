@@ -1,19 +1,19 @@
 export interface ILinkedList<T> {
-  addToTail: (element: T) => void;
-  addToHead: (element: T) => void;
-  getSize: () => number;
-  getTail: () => T | undefined;
-  removeFromHead: () => void;
-  removeFromTail: () => void;
-  insertAt: (element: T, index: number) => void;
-  removeFrom: (index: number) => void;
+  append: (element: T) => void;
+  prepend: (element: T) => void;
+  deleteHead: () => void;
+  deleteTail: () => void;
+  addByIndex: (element: T, index: number) => void;
+  deleteByIndex: (index: number) => void;
+  toArray: () => (T | string)[];
+  changeByIndex: (index: number, newValue: string) => void;
 }
 
 export enum ListOperation {
-  AddToHead = "addToHead",
-  AddToTail = "addToTail",
-  RemovefromHead = "removeFromHead",
-  RemovefromTail = "removeFromTail",
-  InsertAt = "insertAt",
-  RemoveFrom = "removeFrom"
+  Prepend = "prepend",
+  Append = "append",
+  DeleteHead = "deleteHead",
+  DeleteTail = "deleteTail",
+  AddByIndex = "addByIndex",
+  DeleteByIndex = "deleteByIndex"
 }

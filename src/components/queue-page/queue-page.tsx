@@ -6,8 +6,8 @@ import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import { Input } from "../ui/input/input";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
-import { Queue } from "./Queue";
-import styles from "./queuePage.module.css";
+import { Queue } from "./queue";
+import styles from "./queue-page.module.css";
 import { QueueOperation } from "./types";
 
 export const QueuePage: React.FC = () => {

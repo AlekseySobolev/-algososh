@@ -1,0 +1,37 @@
+.algoContainer{
+    margin: auto;
+    width: calc(100% - 410px * 2);
+    
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.btnBox{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 48px;
+}
+.columnBox{
+    display: flex;
+    align-items: baseline; 
+    gap: 10px;
+    margin-bottom: 26px;
+}
+.radioBtn{
+    display: flex;
+    justify-content: space-between;
+    min-width: 143px;
+    margin-right: 52px;
+    gap: 45px;
+}
+.ascBox{
+    display: flex;
+    gap: 12px;
+    margin-right: 80px;
+  }
+  .btn{
+    max-width: 205px;
+  }

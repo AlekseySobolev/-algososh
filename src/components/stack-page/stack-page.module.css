@@ -1,0 +1,35 @@
+.algoContainer{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 68px;
+}
+
+.clickContainer{
+  display: flex;
+  min-width: 829px;
+  justify-content: space-between;
+}
+.clickBox{
+  display: flex;
+  gap: 12px;
+}
+.symbolBox{
+  display: flex;
+  gap: 12px;
+}
+
+.inputBtn{
+  min-width: 377px;
+}
+.pushBtn{
+  min-width: 121px;
+}
+
+.popBtn{
+  min-width: 108px;
+}
+
+.cleanBtn{
+  min-width: 119px;
+}

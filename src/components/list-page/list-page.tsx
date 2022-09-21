@@ -285,7 +285,7 @@ export const ListPage: React.FC = () => {
       <div className={styles.algoContainer}>
         <div className={styles.clickContainer}>
           <div className={styles.topClickBox}>
-            <Input type={"number"} placeholder={"Введите число"} maxLength={4} isLimitText={true} onChange={handleChange} value={inputValue} disabled={isAlgoInProcess} />
+            <Input type={"number"} placeholder={"Введите число"} max={4} isLimitText={true} onChange={handleChange} value={inputValue} disabled={isAlgoInProcess} />
             <Button
               text="Добавить в head"
               handleClick={prependClick}

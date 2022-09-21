@@ -51,4 +51,5 @@ export class Queue<T> implements IQueue<T> {
   get size() { return this.container.length }
   get fillLength() { return this.length }
  
+  
 }

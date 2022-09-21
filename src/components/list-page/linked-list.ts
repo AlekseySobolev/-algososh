@@ -37,7 +37,7 @@ export class LinkedList<T> implements ILinkedList<T> {
       this.listTail = node;
 
     } else {
-      let currentHead = this.listHead;
+      const currentHead = this.listHead;
       this.listHead = node;
       this.listHead.next = currentHead;
     }

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { DELAY_IN_MS } from "../../constants/delays";
 import { ElementStates } from "../../types/element-states";
-import { swap } from "../../utils/functions";
+import { stringSort } from "../../utils/functions";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import { Input } from "../ui/input/input";
@@ -46,31 +46,14 @@ export const StringComponent: React.FC = () => {
     }
   }
 
-  const stringSort = (symbolArr: string[]): string[][] => {
-
-    const arrayOfSortedArray: string[][] = [];
-    arrayOfSortedArray.push([...symbolArr]);
-    
-    let i = 0;
-    let j = symbolArr.length - 1;
-
-    while(i < j){
-      swap(symbolArr, i, j);
-      arrayOfSortedArray.push([...symbolArr]);
-      i++;
-      j--; 
-    }
-    return arrayOfSortedArray;
-  }
-
   const setNextStep = () => {
     stepsCount.current += 1;
     setCurrentSlice(allSlices[stepsCount.current]);
   };
 
   const handleClick = (e: ChangeEvent<HTMLInputElement>) => {
-    isLoader.current = true; //При вводе только одной буквы не показывается лоадер и кружочек, хотя алгоритм исполняется (краевой случай работы алгоритма)(с);
-    setIsStrArrVisible(true); //на эталонном видео к проектной работе при вводе только одного значения, лоадер тоже не показывается 
+    isLoader.current = true; 
+    setIsStrArrVisible(true); 
     timer.current = window.setInterval(setNextStep, DELAY_IN_MS);
   }
 
@@ -101,7 +84,7 @@ export const StringComponent: React.FC = () => {
     <SolutionLayout title="Строка">
       <div className={styles.dataContainer}>
         <div className={styles.inputBox}>
-          <Input maxLength={11} isLimitText={true} onChange={handleChange}  disabled={isLoader.current}/>
+          <Input maxLength={11} isLimitText={true} onChange={(handleChange)}  disabled={isLoader.current}/>
           <Button text="Развернуть" handleClick={handleClick} disabled={isButtonDisable} isLoader={isLoader.current} />
         </div>
         <div className={styles.symbolBox}>
@@ -119,3 +102,4 @@ export const StringComponent: React.FC = () => {
     </SolutionLayout>
   );
 };
+

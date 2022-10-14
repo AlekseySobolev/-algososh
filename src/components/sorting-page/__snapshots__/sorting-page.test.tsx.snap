@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sort algo tests should correct sort empty array 1`] = `
+Array [
+  Object {
+    "currentArray": Array [],
+    "sortedIndexes": Array [],
+  },
+]
+`;

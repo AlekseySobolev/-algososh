@@ -35,7 +35,7 @@ export const Button: React.FC<ButtonProps> = ({
   } ${extraClass}`;
 
   return (
-    <button
+    <button data-testid ='button-class'
       className={className}
       type={type}
       disabled={isLoader || disabled}

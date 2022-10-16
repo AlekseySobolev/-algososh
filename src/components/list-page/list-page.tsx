@@ -19,7 +19,7 @@ export const ListPage: React.FC = () => {
   const isAddOperation = useRef(false);
   const isHeadOperation = useRef(false);
   const littleCircle = useRef<any>(null);
-  const linkedList = useRef(new LinkedList(getRandomArray(0, 100, 4, 6)));
+  const linkedList = useRef(new LinkedList(getRandomArray(0, 100, 5, 5)));
 
   const [inputValue, setInputValue] = useState<string>("");
   const [indexInputValue, setiIsIndexInputValue] = useState<string | number>("");

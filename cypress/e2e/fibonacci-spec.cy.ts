@@ -15,26 +15,21 @@ describe('fibonacci tests', () => {
 
         const qtyNumbers = 5;
         const currentColor = 'rgb(0, 50, 255)';
-
+        const fibSeq = [0,1,1,2,3,5];
         cy.clock()
         cy.get('input').type(qtyNumbers)
         cy.get('button').contains('Развернуть').click()
         cy.tick(3000);
 
-        cy.get('[data-testid=circle]').within(($circleLetters) => {
-            expect($circleLetters).to.have.length(qtyNumbers + 1)
-            expect($circleLetters.eq(0)).to.contain(0);
-            cy.get($circleLetters.eq(0)).should('have.css', 'border-color', currentColor);
-            expect($circleLetters.eq(1)).to.contain(1);
-            cy.get($circleLetters.eq(1)).should('have.css', 'border-color', currentColor);
-            expect($circleLetters.eq(2)).to.contain(1);
-            cy.get($circleLetters.eq(2)).should('have.css', 'border-color', currentColor);
-            expect($circleLetters.eq(3)).to.contain(2);
-            cy.get($circleLetters.eq(3)).should('have.css', 'border-color', currentColor);
-            expect($circleLetters.eq(4)).to.contain(3);
-            cy.get($circleLetters.eq(4)).should('have.css', 'border-color', currentColor);
-            expect($circleLetters.eq(5)).to.contain(5);
-            cy.get($circleLetters.eq(5)).should('have.css', 'border-color', currentColor);
+        cy.get('[data-testid=circle]').each(($letter, index, $letters) => {
+            expect($letters).to.have.length(qtyNumbers + 1)
+            expect($letter).to.contain(fibSeq[index]);
+            cy.get($letter).should('have.css', 'border-color', currentColor);
+           
+        })
+
+        cy.get('[data-testid=bottom-index]').each(($bottomIndex, index) => {
+            expect($bottomIndex).to.contain(index);
         })
 
     })

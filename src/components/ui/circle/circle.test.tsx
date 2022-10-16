@@ -13,7 +13,7 @@ describe("Circle tests",
 
             const circle = <Circle />;
             render(circle);
-            expect(screen.getByTestId('circle-box')).toMatchSnapshot();
+            expect(screen.getByTestId('circle-box')).toHaveTextContent('');
   
         })
 
@@ -33,7 +33,6 @@ describe("Circle tests",
         })
 
         it("Circle in head", () => {
-            let head = 'head';
             const button = <Circle head={<Circle />} />;
             render(button);
             expect(screen.getAllByTestId('circle-box').length).toBe(2);

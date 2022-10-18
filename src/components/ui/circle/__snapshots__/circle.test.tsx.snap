@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Circle tests Circle state equal Changing 1`] = `
+<div
+  class="undefined "
+  data-testid="circle-box"
+>
+  <div
+    class="text text_type_input text_color_input mb-4 undefined undefined undefined"
+  />
+  <div
+    class="undefined   undefined"
+    data-testid="circle"
+  >
+    <p
+      class="text text_type_circle text_color_input undefined"
+    />
+  </div>
+  <p
+    class="text text_type_input text_color_input mt-4 undefined undefined"
+  />
+  <div
+    class="text text_type_input text_color_input mt-4 undefined undefined undefined"
+  />
+</div>
+`;
+
+exports[`Circle tests Circle state equal Default 1`] = `
+<div
+  class="undefined "
+  data-testid="circle-box"
+>
+  <div
+    class="text text_type_input text_color_input mb-4 undefined undefined undefined"
+  />
+  <div
+    class="undefined   undefined"
+    data-testid="circle"
+  >
+    <p
+      class="text text_type_circle text_color_input undefined"
+    />
+  </div>
+  <p
+    class="text text_type_input text_color_input mt-4 undefined undefined"
+  />
+  <div
+    class="text text_type_input text_color_input mt-4 undefined undefined undefined"
+  />
+</div>
+`;
+
+exports[`Circle tests Circle state equal Modified 1`] = `
+<div
+  class="undefined "
+  data-testid="circle-box"
+>
+  <div
+    class="text text_type_input text_color_input mb-4 undefined undefined undefined"
+  />
+  <div
+    class="undefined   undefined"
+    data-testid="circle"
+  >
+    <p
+      class="text text_type_circle text_color_input undefined"
+    />
+  </div>
+  <p
+    class="text text_type_input text_color_input mt-4 undefined undefined"
+  />
+  <div
+    class="text text_type_input text_color_input mt-4 undefined undefined undefined"
+  />
+</div>
+`;
+
+exports[`Circle tests Circle with isSmall true 1`] = `
+<div
+  class="undefined "
+  data-testid="circle-box"
+>
+  <div
+    class="text text_type_input text_color_input mb-4 undefined undefined undefined"
+  />
+  <div
+    class="undefined  undefined undefined"
+    data-testid="circle"
+  >
+    <p
+      class="text text_type_circle text_color_input undefined"
+    />
+  </div>
+  <p
+    class="text text_type_input text_color_input mt-4 undefined undefined"
+  />
+  <div
+    class="text text_type_input text_color_input mt-4 undefined undefined undefined"
+  />
+</div>
+`;
+
+exports[`Circle tests Circle without letter 1`] = `
+<div
+  class="undefined "
+  data-testid="circle-box"
+>
+  <div
+    class="text text_type_input text_color_input mb-4 undefined undefined undefined"
+  />
+  <div
+    class="undefined   undefined"
+    data-testid="circle"
+  >
+    <p
+      class="text text_type_circle text_color_input undefined"
+    />
+  </div>
+  <p
+    class="text text_type_input text_color_input mt-4 undefined undefined"
+  />
+  <div
+    class="text text_type_input text_color_input mt-4 undefined undefined undefined"
+  />
+</div>
+`;

@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom/extend-expect';
 import React from "react";
 import { Circle } from "./circle";
@@ -48,7 +48,6 @@ describe("Circle tests",
         })
 
         it("Circle in tail", () => {
-            let tail = 'tail';
             const button = <Circle tail={<Circle />} />;
             render(button);
             expect(screen.getAllByTestId('circle-box').length).toBe(2);
@@ -67,7 +66,8 @@ describe("Circle tests",
      
             const button = <Circle isSmall={true} />;
             render(button);
-            expect(screen.getByTestId('circle-box')).toMatchSnapshot();
+            screen.debug();
+            expect(screen.getByTestId('circle')).not.toHaveStyle('width: 80px');
 
         })
 
@@ -75,21 +75,24 @@ describe("Circle tests",
      
             const button = <Circle state={ElementStates.Default} />;
             render(button);
-            expect(screen.getByTestId('circle-box')).toMatchSnapshot();
-          
+            expect(screen.getByTestId('circle')).not.toHaveStyle('border-color: rgb(0, 50, 255)');
+            expect(screen.getByTestId('circle')).not.toHaveStyle('border-color:  rgb(127, 224, 81)');
+
         })
         it("Circle state equal Changing", () => {
      
             const button = <Circle state={ElementStates.Changing} />;
             render(button);
-            expect(screen.getByTestId('circle-box')).toMatchSnapshot();
+            expect(screen.getByTestId('circle')).not.toHaveStyle('border-color: rgb(210, 82, 225)');
+            expect(screen.getByTestId('circle')).not.toHaveStyle('border-color:  rgb(127, 224, 81)');
         
         })
         it("Circle state equal Modified", () => {
      
             const button = <Circle state={ElementStates.Modified} />;
             render(button);
-            expect(screen.getByTestId('circle-box')).toMatchSnapshot();
+            expect(screen.getByTestId('circle')).not.toHaveStyle('border-color: rgb(210, 82, 225)');
+            expect(screen.getByTestId('circle')).not.toHaveStyle('border-color:  rgb(0, 50, 255)');
        
         })
 

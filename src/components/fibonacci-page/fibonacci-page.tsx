@@ -84,7 +84,7 @@ export const FibonacciPage: React.FC = () => {
             currentFibNumber.map((fibNumber: number, index: number) => {
               return (
                 <React.Fragment key={index}>
-                  <Circle index={index} letter={String(fibNumber)} />
+                  <Circle index={index} letter={String(fibNumber)}/>
                 </React.Fragment>
               )
             })}
